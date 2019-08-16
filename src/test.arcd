@@ -1,0 +1,52 @@
+start:
+    var number = 10;
+    var string1 = "Hello world!";
+    var string2 = "Bye world!";
+    var bool = true;
+
+    meta {array} myArray = [];
+    meta{queue} myQueue = [];
+    meta{stack} myStack = [];
+    meta{list} myList = [];
+
+    doFor{number}:
+        if{bool}:
+            print{string1};
+            bool = false;
+        not:
+            print{string2};
+            bool = true;
+    
+    doWhile{number > 0}:
+        myArray.add{number};
+        myQueue.enqueue{number};
+        myStack.stack{number};
+        myList.add{number};
+        number--;
+    
+    print{"Enter a number between 1-10: "}
+    read{input};
+
+    switch(input):
+        1:
+            print{"You chose option ${input}!"};
+        2:
+            print{"You chose option ${input}!"};
+        3:
+            print{"You chose option ${input}!"};
+        4:
+            print{"You chose option ${input}!"};
+        5:
+            print{"You chose option ${input}!"};
+        6:
+            print{"You chose option ${input}!"};
+        7:
+            print{"You chose option ${input}!"};
+        8:
+            print{"You chose option ${input}!"};
+        9:
+            print{"You chose option ${input}!"};
+        default:
+            print{"${input} is not a number!"};
+        error:
+            print{"You chose a number bigger/smaller than 10!"};

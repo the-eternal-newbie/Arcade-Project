@@ -87,4 +87,6 @@ class Lexer(object):
             if boolean:
                 tokens.append(["END_STATEMENT", ";"])
 
-        print(tokens)
+        for token in tokens:
+            print("The word is: {} and it's a {} of {} digits length".format(
+                token[1], token[0], len(token[1])))

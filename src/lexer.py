@@ -80,7 +80,8 @@ class Lexer(object):
             else:
                 for key in self.regex_dict:
                     if re.match(key, word):
-                        tokens.append([self.regex_dict[key], word]) break
+                        tokens.append([self.regex_dict[key], word])
+                        break
 
             # If the flag is ON it means that the word has a semicolon, therefore it must be an end statement
             if boolean:

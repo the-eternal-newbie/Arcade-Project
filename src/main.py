@@ -1,4 +1,5 @@
 import lexer
+import parser_lib
 
 if __name__ == '__main__':
     # Start reading snippet code file for compiling
@@ -13,6 +14,9 @@ if __name__ == '__main__':
     # Initializing Lexer class
     lex = lexer.Lexer(content)
     # Calling lexer method "tokenize" to obtain the tokens in the source code
-    tokens = lex.tokenize()
-
+    lex.tokenize()
+    tokens = lex.get_tokens()
+    print(tokens)
+    #parser = parser_lib.Parser(tokens)
+    # parser.parse()
     pass

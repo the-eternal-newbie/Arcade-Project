@@ -106,13 +106,7 @@ t_COMMA = r','
 t_COLON = r':'
 t_QUOTES = r'"'
 
-# A regular expression rule with some action code
-
-
-# def t_NUMBER(t):
-#    r'\d+'
-#    t.value = int(t.value)
-#    return t
+# Regular expression rules for specific tokens
 
 
 def t_IDENTIFIER(t):
@@ -158,6 +152,8 @@ def t_newline(t):
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+
+# Spacetabs handling
 
 
 def t_SPACETAB(t):

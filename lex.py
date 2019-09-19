@@ -66,7 +66,9 @@ reserved = {
     'error': 'ERROR_SWITCH',
     'default': 'DEFAULT_CASE',
     'print': 'OUT_STREAM',
-    'read': 'IN_STREAM'
+    'read': 'IN_STREAM',
+    'True': 'BOOLEAN_TRUE',
+    'False': 'BOOLEAN_FALSE'
 }
 
 tokens = tokens + list(reserved.values())
@@ -112,9 +114,8 @@ t_QUOTES = r'"'
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
 
-    if(t.value.upper() in reserved):
-        t.value = t.value.upper()
-        t.type = t.value
+    if(t.value in reserved):
+        t.type = reserved[t.value]
 
     return(t)
 
@@ -132,7 +133,7 @@ def t_FLOAT(t):
 
 
 def t_STRING(t):
-    r'^[a-zA-Z0-9_ \*,.\-;\+%_\!\?\$]+$'
+    r'"(.*?)"'
     t.value = str(t.value)
     return(t)
 
@@ -158,7 +159,7 @@ def t_error(t):
 
 def t_SPACETAB(t):
     r'[ \t]+'
-    print("Whitespace or tab")
+    pass
 
 
 # Build the lexer

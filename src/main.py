@@ -40,6 +40,7 @@ if __name__ == "__main__":
     while(True):
         clear()
         file_name = str(input("Type source code name to compile: "))
+        file_name += ".arcd"
 
         with open("../test/" + file_name, 'r') as file:
             source_code = file.read()

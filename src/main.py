@@ -1,4 +1,5 @@
 from os import system, name, remove, walk, rmdir, path
+from sys import stdin
 from lex import lexer
 from parse import parser
 
@@ -23,6 +24,32 @@ def delete_temp_files():
     remove("parsetab.py")
 
 
+def read_file():
+    file_name = str(input("Type source code name to compile: "))
+    file_name += ".arcd"
+
+    with open("../test/" + file_name, 'r') as file:
+        source_code = file.read()
+
+    return(file_name, source_code)
+
+
+def write_file():
+    file_name = str(input("Please enter a name for the new file: "))
+    file_name += ".arcd"
+    source_code = ""
+    print("OK! {} created, start writing coude!".format(file_name))
+    try:
+        file = open("../test/" + file_name, 'w+')
+        for line in stdin:
+            source_code += line + "\n"
+            file.write(line)
+    except(KeyboardInterrupt):
+        file.close()
+        clear()
+        return(file_name, source_code)
+
+
 def lexing(source_code):
     lexer.input(source_code)
     while(True):
@@ -39,12 +66,18 @@ def parsing(source_code):
 if __name__ == "__main__":
     while(True):
         clear()
-        file_name = str(input("Type source code name to compile: "))
-        file_name += ".arcd"
 
-        with open("../test/" + file_name, 'r') as file:
-            source_code = file.read()
+        print("Welcome to Arcade compiler!\n")
+        print("\n1. Write code\n2. Read code from file\n")
+        compile_opt = str(input("Please select one option. "))
 
+        clear()
+        if(compile_opt == "1"):
+            file_name, source_code = write_file()
+        elif(compile_opt == "2"):
+            file_name, source_code = read_file()
+
+        clear()
         print("Selected file {}. What do you wanna do?".format(file_name))
         print("\n1. Lexical Analysis\n2. Syntactical Analysis\n")
 

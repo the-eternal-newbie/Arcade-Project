@@ -7,7 +7,7 @@ const
 VAR
   x, y, z, q, r;
 
-PROCEDURE multiply;
+PROCEDURE multiple;
 VAR a, b;
 BEGIN
   a := x;

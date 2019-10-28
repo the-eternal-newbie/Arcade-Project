@@ -2,6 +2,7 @@ from os import system, name, remove, walk, rmdir, path
 from sys import stdin
 from lex import lexer
 from parse import parser
+from parse_semantic import parser_semantic
 
 
 def clear():
@@ -13,7 +14,7 @@ def clear():
         _ = system('clear')
 
 
-def delete_temp_files():
+def delete_temp_files(semantic=False):
     for root, dirs, files in walk("__pycache__", topdown=False):
         for name in files:
             remove(path.join(root, name))
@@ -22,6 +23,8 @@ def delete_temp_files():
     rmdir("__pycache__")
     remove("parser.out")
     remove("parsetab.py")
+    if(semantic):
+        remove("graphvizthree.vz")
 
 
 def read_file():
@@ -50,6 +53,13 @@ def write_file():
         return(file_name, source_code)
 
 
+def translate(result):
+    graphFile = open('graphvizthree.vz', 'w')
+    graphFile.write(result.translate())
+    graphFile.close()
+    print("The translated program has been saved as \"graphvizthree.vz\"")
+
+
 def lexing(source_code):
     lexer.input(source_code)
     while(True):
@@ -63,23 +73,23 @@ def parsing(source_code):
     parser.parse(source_code)
 
 
+def semantic(source_code):
+    result = parser_semantic.parse(source_code, debug=True)
+    translate(result)
+    pass
+
+
 if __name__ == "__main__":
+    flag = False
     while(True):
         clear()
-
         print("Welcome to Arcade compiler!\n")
-        print("\n1. Write code\n2. Read code from file\n")
-        compile_opt = str(input("Please select one option. "))
 
-        clear()
-        if(compile_opt == "1"):
-            file_name, source_code = write_file()
-        elif(compile_opt == "2"):
-            file_name, source_code = read_file()
+        file_name, source_code = read_file()
 
         clear()
         print("Selected file {}. What do you wanna do?".format(file_name))
-        print("\n1. Lexical Analysis\n2. Syntactical Analysis\n")
+        print("\n1. Lexical Analysis\n2. Syntactical Analysis\n3. Semantic Analysis\n")
 
         while(True):
             analysis = str(input("Please enter the option number: "))
@@ -89,8 +99,12 @@ if __name__ == "__main__":
             elif(analysis == "2"):
                 parsing(source_code)
                 break
+            elif(analysis == "3"):
+                flag = True
+                semantic(source_code)
+                break
 
-        delete_temp_files()
         decision = str(input("Do you want to try another file? (y/n): "))
         if(decision != "y"):
+            delete_temp_files(flag)
             break

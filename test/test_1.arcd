@@ -10,7 +10,7 @@ VAR
 PROCEDURE multiple;
 VAR a, b;
 BEGIN
-  a := x;
-  b := y;
-  z := 0;
+  a:=x;
+  b:=y;
+  z:=0;
 END;

@@ -1,0 +1,10 @@
+VAR a, b, c, d;
+
+BEGIN
+  a:=sin(10);
+  b:=cos(2);
+  c:=5*3;
+  d:=tan(5);
+
+  print(a, b, c, d);
+END;

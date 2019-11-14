@@ -1,0 +1,9 @@
+VAR a, b, c;
+
+BEGIN
+  a:=9-2;
+  b:=10/5;
+  c:=123+3;
+
+  print(a, b, c);
+END;

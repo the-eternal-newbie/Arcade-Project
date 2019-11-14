@@ -1,0 +1,12 @@
+VAR a, b, c, d, e, f;
+
+BEGIN
+  a:=sin(5);
+  b:=cos(3);
+  c:=tan(4);
+  d:=sec(6);
+  e:=ctg(1);
+  f:=csc(2);
+
+  print(a, b, c, d, e, f);
+END;
